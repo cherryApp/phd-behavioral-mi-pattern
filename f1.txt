@@ -1,0 +1,10 @@
+2 Leclerc Ferrari
+3 Pérez RedBull
+9 Alonso AstonMartin
+1 Verstappen RedBull
+4 Ocon Alpine
+8 Russell Mercedes
+7 Hamilton Mercedes
+5 Stroll AstonMartin
+10 Piastri McLaren
+6 Sainz	Ferrari
