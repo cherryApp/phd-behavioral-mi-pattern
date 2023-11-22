@@ -1,4 +1,5 @@
 import math
+import time
 import numpy as np
 import torch
 import torch.nn as nn
@@ -14,16 +15,16 @@ device = (
 )
 print(f"Using {device} device")
 
-np.random.seed(0)
-torch.manual_seed(0)
+ts = int(time.time())
+np.random.seed(ts)
+torch.manual_seed(ts)
 
 def conditionator(x):
-    return (x[0] < 35
-            and x[1] < 45
-            and x[2] < 60
-            and x[3] < 75)
+    return (x[0] < 50 
+            and x[1] < 50
+            and x[2] < 50)
 
-def dataset_generator(num_samples=10000):
+def dataset_generator(num_samples=20000):
     X = np.random.randint(1, 100, size=(num_samples, 10), )
     y = [1 if conditionator(item) else 0 for item in X]
 
@@ -80,7 +81,7 @@ print(model)
 loss_fn   = nn.BCELoss()  # binary cross entropy
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-n_epochs = 4
+n_epochs = 5
 batch_size = 100
 
 for epoch in range(n_epochs):
@@ -100,7 +101,7 @@ accuracy = (y_pred.round() == y).float().mean()
 print(f"Accuracy {accuracy}")
 
 # Test the model with new samples
-Xt, yt = dataset_generator(num_samples=100000)
+Xt, yt = dataset_generator(num_samples=10000)
 predictions = (model(Xt) > 0.5).int()
 fails = 0
 positives = 0
